@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import ttk
 import csv
 from tkinter.scrolledtext import ScrolledText
+from tkinter import messagebox
 from tkinter import filedialog as fd
 import plotly.graph_objs as go
 from math import *
@@ -477,6 +478,31 @@ st = ScrolledText(down_frame, width=85,  height=10, bd=1.5, font = 'Arial 10')
 st.grid(row=1, column=1, padx=5, pady=0, sticky='w'+'e'+'n'+'s')
 Button(down_frame, text="Start Processing", command=trajectory_build_function, width=85).grid(row=0, column=1, padx=5, pady=3, sticky='w'+'e'+'n'+'s')
 
+#Меню
+menu_bar = Menu(window_main)
+
+def calculator():
+    os.system("C:/WINDOWS/System32/calc.exe")
+    return
+
+def show_about():
+    messagebox.showinfo(title="About", message="Version: 1.0\nAuthor: Stanislav Nikulin\nTelegram: @stan_nikulin\nDate: 2023\nLicense: MIT")
+    
+
+file_menu = Menu(menu_bar, tearoff=0)
+file_menu.add_command(label="Exit", command=window_main.quit)
+menu_bar.add_cascade(label="File", menu=file_menu)
+
+edit_menu = Menu(menu_bar, tearoff=0)
+edit_menu.add_command(label="Calculator", command=calculator)
+
+menu_bar.add_cascade(label="Options", menu=edit_menu)
+
+help_menu = Menu(menu_bar, tearoff=0)
+help_menu.add_command(label="About...", command=show_about)
+menu_bar.add_cascade(label="Help", menu=help_menu)
+
+window_main.config(menu=menu_bar)
 
 
 
