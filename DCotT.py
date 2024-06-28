@@ -1,3 +1,29 @@
+import subprocess
+import sys
+import importlib.util
+
+# Список библиотек и их версии
+libraries = {
+    'plotly': '5.15.0',
+    'pandas': '2.0.2',
+    'numpy': '1.23.5'
+}
+
+def is_installed(package_name):
+    spec = importlib.util.find_spec(package_name)
+    return spec is not None
+
+def install(package_name, version):
+    subprocess.check_call([sys.executable, '-m', 'pip', 'install', f'{package_name}=={version}'])
+
+for library, version in libraries.items():
+    if not is_installed(library):
+        print(f"{library} not installed. Installing...")
+        install(library, version)
+    else:
+        print(f"{library} is already installed.")
+
+# Импорт библиотек
 from tkinter import *
 from tkinter import ttk
 import csv
